@@ -53,3 +53,13 @@ def test_market_data_section_points_to_get_market_data_tool() -> None:
         "Market data routing section no longer references the get_market_data "
         "tool. The deterministic dispatch path is broken."
     )
+
+
+@pytest.mark.unit
+def test_system_prompt_mentions_deterministic_routing() -> None:
+    """Patch 3: the system prompt notes that simple market-data prompts may
+    be intercepted by the deterministic router before reaching the LLM."""
+    assert "routed deterministically" in _SYSTEM_PROMPT, (
+        "System prompt no longer mentions the deterministic router. Update "
+        "or restore the note so the LLM knows the dispatch path exists."
+    )
