@@ -151,4 +151,54 @@ baseline regression — investigate before merging.
 
 ---
 
+## 15. Evidence Quality Gate — Patch 15
+
+Added in Patch 15 as a post-validation layer inside `SwarmWorkflowDispatcher`.
+Implemented in `agent/src/agent/swarm_evidence_gate.py`.
+
+### What it validates
+
+The gate evaluates the corpus formed by `final_report` + all task `summary`
+fields (concatenated, lower-cased) for the presence of **evidence keywords**:
+financial terms, asset names, metric labels, and analytical indicators. It also
+checks for **limitation keywords** in `final_report` as an advisory signal.
+
+| Check | Keywords source | Failure mode |
+|---|---|---|
+| Evidence keywords | `_EVIDENCE_KEYWORDS` (frozenset, ~30 terms) | gate=partial → dispatcher status=partial |
+| Limitation keywords | `_LIMITATION_KEYWORDS` (frozenset, ~15 terms) | warnings=["no_limitations_section"] (advisory; gate remains pass) |
+| Empty report | n/a | gate=fail → dispatcher status=failed |
+
+### What it does NOT validate
+
+- Factual correctness of on-chain data, DeFi TVL, or sentiment scores.
+- Whether the cited sources are real or accessible.
+- Whether the numeric values are accurate.
+- Whether the report reflects a specific time period correctly.
+
+### Gate status → dispatcher status
+
+| Gate status | Dispatcher status |
+|---|---|
+| pass | success |
+| partial | partial |
+| fail | failed |
+
+### Fail-closed properties
+
+- Gate runs before `answer` and `end` events are emitted.
+- Gate exception → propagated as failed (never suppressed).
+- Gate result is included in the return dict as `evidence_gate`.
+- Trace event: `quality_gate` (event type not captured by the canonical trace filter).
+- No LLM fallback on gate partial or fail.
+- No web tool invoked by the gate.
+
+### Residual risk
+
+Keyword matching is structural, not semantic. A report that contains one of the
+evidence keywords but no meaningful analysis will still pass. The gate is a
+minimum bar, not a quality audit. Content accuracy remains outside this baseline.
+
+---
+
 Level 4 Swarm Workflow — SEALED

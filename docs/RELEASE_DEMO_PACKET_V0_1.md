@@ -204,7 +204,9 @@ environment. It does not place orders and does not provide financial advice."
 - **No live trading.** No exchange adapter exists.
 - **Swarm factual accuracy not audited.** Agent outputs depend on the underlying
   model and available data feeds. On-chain metrics, DeFi TVL, and sentiment
-  scores are not independently verified.
+  scores are not independently verified. An evidence quality gate (`SwarmEvidenceQualityGate`)
+  validates structural evidence presence (keywords in report and task summaries),
+  not factual correctness.
 - **Preset allowlist is fixed.** Only 25 named swarm presets are supported.
   Custom swarm prompts without an explicit preset name fall through to the LLM.
 - **Local model quality varies.** Results depend on the model configured in
