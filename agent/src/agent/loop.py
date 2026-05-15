@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
 from src.agent.context import ContextBuilder
+from src.agent.market_data_dispatcher import MarketDataDispatcher
 from src.agent.memory import WorkspaceMemory
 from src.agent.tools import ToolRegistry
 from src.agent.trace import TraceWriter
@@ -342,6 +343,18 @@ class AgentLoop:
 
         trace = TraceWriter(run_dir)
         trace.write({"type": "start", "prompt": user_message[:500]})
+
+        # Patch 3: deterministic market-data short-circuit. Runs before the
+        # ReAct loop. Returns None for any prompt that should go through the
+        # LLM normally; returns a result dict (and emits its own trace events)
+        # for prompts that match a simple market-data intent.
+        routed = MarketDataDispatcher().try_route(user_message, self.registry, trace)
+        if routed is not None:
+            if routed.get("status") == "success":
+                state_store.mark_success(run_dir)
+            else:
+                state_store.mark_failure(run_dir, "market_data_router")
+            return routed
 
         iteration = 0
         final_content = ""
