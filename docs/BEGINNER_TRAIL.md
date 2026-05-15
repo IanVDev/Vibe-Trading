@@ -128,7 +128,7 @@ These are natural extensions of the trail but are not yet implemented:
 | **Walk-forward validation** | Add an out-of-sample validation step that re-runs the backtest on a held-out period and flags overfitted strategies. |
 | **Paper trading sandbox** | Connect the backtest dispatcher output to a paper trading engine that simulates live execution without real capital. |
 | **CI on fork** | Set up GitHub Actions on `IanVDev/Vibe-Trading` to run the four SEALED canaries on every PR. |
-| **Release demo checklist** | A structured checklist verifying all four levels pass a smoke test before a release tag is created. |
+| **Demo Readiness Checklist** | A structured checklist verifying all four levels pass a smoke test before a release tag is created. See [DEMO_READINESS_CHECKLIST.md](DEMO_READINESS_CHECKLIST.md). |
 
 ---
 
