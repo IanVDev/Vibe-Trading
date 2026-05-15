@@ -129,6 +129,7 @@ These are natural extensions of the trail but are not yet implemented:
 | **Paper trading sandbox** | Connect the backtest dispatcher output to a paper trading engine that simulates live execution without real capital. |
 | **CI on fork** | Set up GitHub Actions on `IanVDev/Vibe-Trading` to run the four SEALED canaries on every PR. |
 | **Demo Readiness Checklist** | A structured checklist verifying all four levels pass a smoke test before a release tag is created. See [DEMO_READINESS_CHECKLIST.md](DEMO_READINESS_CHECKLIST.md). |
+| **Local Gate Runbook** | Mandatory local validation process replacing remote CI. Defines gate commands, PR-FLOW evidence format, and the NÃO EXECUTADO rule. See [LOCAL_GATE_RUNBOOK.md](LOCAL_GATE_RUNBOOK.md). |
 
 ---
 

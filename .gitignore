@@ -47,6 +47,7 @@ docs/*
 !docs/SWARM_WORKFLOW_BASELINE.md
 !docs/BEGINNER_TRAIL.md
 !docs/DEMO_READINESS_CHECKLIST.md
+!docs/LOCAL_GATE_RUNBOOK.md
 !wiki/docs/
 !wiki/docs/**
 data/minutes/
