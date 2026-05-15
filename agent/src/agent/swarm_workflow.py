@@ -10,6 +10,7 @@ from typing import Any, Optional
 
 from src.agent.swarm_intent import SwarmIntent, detect_swarm_intent
 from src.agent.market_data_dispatcher import _sanitize
+from src.agent.swarm_evidence_gate import SwarmEvidenceQualityGate
 
 
 def _trace(trace: Any, event_type: str, **kwargs: Any) -> None:
@@ -65,17 +66,35 @@ class SwarmWorkflowDispatcher:
 
         _trace(trace, "workflow_step", name="validate_report",
                task_count=len(tasks), completed=len(completed_tasks))
+
+        gate_result = SwarmEvidenceQualityGate().evaluate(final_report, tasks)
+        # Emitted as "quality_gate" — not captured by the SEALED trace-order filter.
+        _trace(trace, "quality_gate", name="evidence_quality_gate",
+               gate_status=gate_result["status"],
+               has_evidence=gate_result["has_evidence"],
+               has_limitations_section=gate_result["has_limitations_section"])
+
+        if gate_result["status"] == "fail":
+            return self._fail(
+                "evidence gate: " + gate_result["reason"],
+                "evidence_gate_fail",
+                trace,
+            )
+
+        final_status = "success" if gate_result["status"] == "pass" else "partial"
+
         _trace(trace, "answer")
-        _trace(trace, "end", status="success", iterations=0, routed_by=self.ROUTED_BY)
+        _trace(trace, "end", status=final_status, iterations=0, routed_by=self.ROUTED_BY)
 
         return {
-            "status": "success",
+            "status": final_status,
             "content": final_report,
             "iterations": 0,
             "routed_by": self.ROUTED_BY,
             "run_id": result.get("run_id", ""),
             "preset": result.get("preset", intent.preset_name),
             "task_count": len(tasks),
+            "evidence_gate": gate_result,
         }
 
     @staticmethod
