@@ -45,6 +45,7 @@ docs/*
 !docs/CANDLESTICK_WORKFLOW_BASELINE.md
 !docs/BACKTEST_WORKFLOW_BASELINE.md
 !docs/SWARM_WORKFLOW_BASELINE.md
+!docs/BEGINNER_TRAIL.md
 !wiki/docs/
 !wiki/docs/**
 data/minutes/
