@@ -781,6 +781,23 @@ Vibe-Trading is part of the **[HKUDS](https://github.com/HKUDS)** agent ecosyste
 
 ---
 
+## 🏁 Beginner Trail
+
+Four deterministic pre-LLM dispatchers have been built and SEALED on this fork,
+each replacing an unreliable LLM orchestration path with verifiable Python code:
+
+| Level | Workflow | Status |
+|-------|----------|--------|
+| 1 | Market Data Routing | **SEALED** |
+| 2 | Candlestick Pattern Workflow | **SEALED** |
+| 3 | MA-Crossover Backtest Workflow | **SEALED** |
+| 4 | Named-Preset Swarm Workflow | **SEALED** |
+
+See [docs/BEGINNER_TRAIL.md](docs/BEGINNER_TRAIL.md) for objectives, canonical
+prompts, success contracts, limitations, and next steps.
+
+---
+
 ## 🗺 Roadmap
 
 > We ship in phases. Items move to [Issues](https://github.com/HKUDS/Vibe-Trading/issues) when work begins.
