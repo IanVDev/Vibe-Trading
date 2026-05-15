@@ -25,6 +25,7 @@ from src.agent.backtest_workflow import BacktestWorkflowDispatcher
 from src.agent.candlestick_workflow import CandlestickWorkflowDispatcher
 from src.agent.context import ContextBuilder
 from src.agent.market_data_dispatcher import MarketDataDispatcher
+from src.agent.swarm_workflow import SwarmWorkflowDispatcher
 from src.agent.memory import WorkspaceMemory
 from src.agent.tools import ToolRegistry
 from src.agent.trace import TraceWriter
@@ -376,6 +377,15 @@ class AgentLoop:
                 state_store.mark_success(run_dir)
             else:
                 state_store.mark_failure(run_dir, "backtest_workflow")
+            return routed
+
+        # Patch 9: deterministic swarm workflow short-circuit.
+        routed = SwarmWorkflowDispatcher().try_route(user_message, self.registry, trace)
+        if routed is not None:
+            if routed.get("status") == "success":
+                state_store.mark_success(run_dir)
+            else:
+                state_store.mark_failure(run_dir, "swarm_workflow")
             return routed
 
         iteration = 0
