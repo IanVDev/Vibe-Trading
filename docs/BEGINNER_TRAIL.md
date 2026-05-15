@@ -130,6 +130,7 @@ These are natural extensions of the trail but are not yet implemented:
 | **CI on fork** | Set up GitHub Actions on `IanVDev/Vibe-Trading` to run the four SEALED canaries on every PR. |
 | **Demo Readiness Checklist** | A structured checklist verifying all four levels pass a smoke test before a release tag is created. See [DEMO_READINESS_CHECKLIST.md](DEMO_READINESS_CHECKLIST.md). |
 | **Local Gate Runbook** | Mandatory local validation process replacing remote CI. Defines gate commands, PR-FLOW evidence format, and the NÃO EXECUTADO rule. See [LOCAL_GATE_RUNBOOK.md](LOCAL_GATE_RUNBOOK.md). |
+| **Release Demo Packet v0.1** | Curated demo guide with canonical prompts, expected outputs, prohibition list, and pre/post-demo checklists. See [RELEASE_DEMO_PACKET_V0_1.md](RELEASE_DEMO_PACKET_V0_1.md). |
 
 ---
 
