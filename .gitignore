@@ -49,6 +49,7 @@ docs/*
 !docs/DEMO_READINESS_CHECKLIST.md
 !docs/LOCAL_GATE_RUNBOOK.md
 !docs/RELEASE_DEMO_PACKET_V0_1.md
+!docs/PROJECT_STATE_V0_1.md
 !wiki/docs/
 !wiki/docs/**
 data/minutes/
