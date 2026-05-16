@@ -131,6 +131,7 @@ These are natural extensions of the trail but are not yet implemented:
 | **Demo Readiness Checklist** | A structured checklist verifying all four levels pass a smoke test before a release tag is created. See [DEMO_READINESS_CHECKLIST.md](DEMO_READINESS_CHECKLIST.md). |
 | **Local Gate Runbook** | Mandatory local validation process replacing remote CI. Defines gate commands, PR-FLOW evidence format, and the NÃO EXECUTADO rule. See [LOCAL_GATE_RUNBOOK.md](LOCAL_GATE_RUNBOOK.md). |
 | **Release Demo Packet v0.1** | Curated demo guide with canonical prompts, expected outputs, prohibition list, and pre/post-demo checklists. See [RELEASE_DEMO_PACKET_V0_1.md](RELEASE_DEMO_PACKET_V0_1.md). |
+| **Project State v0.1** | Point-in-time snapshot of what is SEALED, runtime-verified, documented, and enabled — including real smoke results and explicit limitations. See [PROJECT_STATE_V0_1.md](PROJECT_STATE_V0_1.md). |
 
 ---
 
